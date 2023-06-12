@@ -1,7 +1,8 @@
 problems = document.querySelectorAll(".problem > a");
 
 var current = [];
-current = JSON.parse(localStorage.getItem("current"));
+current = JSON.parse(document.cookie.split('=')[1]);
+console.log(JSON.parse(document.cookie.split('=')[1]));
 
 function changingStatus(event) { 
     const nowStatus = event.currentTarget.getAttribute("id");
@@ -9,21 +10,21 @@ function changingStatus(event) {
 
     if (nowStatus === "none") {
         event.currentTarget.setAttribute("id", "trying");
-        current[problemNumber] = 1;
+        current[problemNumber] = '1';
     }
     else if (nowStatus === "trying") {
         event.currentTarget.setAttribute("id", "implementing");
-        current[problemNumber] = 2;
+        current[problemNumber] = '2';
     }
     else if (nowStatus === "implementing") {
         event.currentTarget.setAttribute("id", "solved");
-        current[problemNumber] = 3;
+        current[problemNumber] = '3';
     }
     else if (nowStatus === "solved") {
         event.currentTarget.setAttribute("id", "none");
-        current[problemNumber] = 0;
+        current[problemNumber] = '';
     }
-    localStorage.setItem("current", JSON.stringify(current));
+    document.cookie = "current" + JSON.stringify(current);
 }
 
 function rollback(event) {
@@ -32,36 +33,36 @@ function rollback(event) {
 
     if (nowStatus === "none") {
         event.currentTarget.parentNode.setAttribute("id", "solved");
-        current[problemNumber] = 3;
+        current[problemNumber] = '3';
     }
     else if (nowStatus === "trying") {
         event.currentTarget.parentNode.setAttribute("id", "none");
-        current[problemNumber] = 0;
+        current[problemNumber] = '';
     }
     else if (nowStatus === "implementing") {
         event.currentTarget.parentNode.setAttribute("id", "trying");
-        current[problemNumber] = 1;
+        current[problemNumber] = '1';
     }
     else if (nowStatus === "solved") {
         event.currentTarget.parentNode.setAttribute("id", "implementing");
-        current[problemNumber] = 2;
+        current[problemNumber] = '2';
     }
-    localStorage.setItem("current", JSON.stringify(current));
+    document.cookie = "current" + JSON.stringify(current);
 }
 
 for (var i = 0; i < problems.length; i++) {
     problems[i].parentNode.addEventListener("click", changingStatus);
     problems[i].addEventListener("click", rollback);
-    if (current[problems[i].getAttribute("href").substr(32)] === 0) {
+    if (current[problems[i].getAttribute("href").substr(32)] === '') {
         problems[i].parentNode.setAttribute("id", "none");
     }
-    else if (current[problems[i].getAttribute("href").substr(32)] === 1) {
+    else if (current[problems[i].getAttribute("href").substr(32)] === '1') {
         problems[i].parentNode.setAttribute("id", "trying");
     }
-    else if (current[problems[i].getAttribute("href").substr(32)] === 2) {
+    else if (current[problems[i].getAttribute("href").substr(32)] === '2') {
         problems[i].parentNode.setAttribute("id", "implementing");
     }
-    else if (current[problems[i].getAttribute("href").substr(32)] === 3) {
+    else if (current[problems[i].getAttribute("href").substr(32)] === '3') {
         problems[i].parentNode.setAttribute("id", "solved");
     }
 }
