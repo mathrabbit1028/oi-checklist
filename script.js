@@ -30,12 +30,7 @@ function changingStatus(event) {
         event.currentTarget.setAttribute("id", "none");
         current[problemNumber] = "";
     }
-    var newCookie = "";
-    for (var i = 0; i < current.length; i++) {
-        if (current[i] != "") {
-            newCookie += i.toString() + "=" + current[i] + ";";
-        }
-    }
+    var newCookie = problemNumber.toString() + "=" + current[problemNumber];
     console.log(newCookie);
     document.cookie = newCookie;
 }
