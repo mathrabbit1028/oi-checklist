@@ -3,6 +3,13 @@ problems = document.querySelectorAll(".problem > a");
 var current = [];
 for (var i = 0; i < 100000; i++) current.push('');
 
+console.log(document.cookie)
+loadCookie = document.cookie.split(";");
+for (var i = 0; i < loadCookie.length; i++) {
+    current[Number(loadCookie[i].split("=")[0])] = loadCookie[i].split("=")[1];
+}
+
+
 function changingStatus(event) { 
     const nowStatus = event.currentTarget.getAttribute("id");
     const problemNumber = parseInt(event.currentTarget.firstChild.getAttribute("href").substr(32));
