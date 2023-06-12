@@ -24,7 +24,7 @@ function changingStatus(event) {
         event.currentTarget.setAttribute("id", "none");
         current[problemNumber] = '';
     }
-    document.cookie = "current" + JSON.stringify(current);
+    document.cookie = "current=" + JSON.stringify(current);
 }
 
 function rollback(event) {
@@ -47,7 +47,7 @@ function rollback(event) {
         event.currentTarget.parentNode.setAttribute("id", "implementing");
         current[problemNumber] = '2';
     }
-    document.cookie = "current" + JSON.stringify(current);
+    document.cookie = "current=" + JSON.stringify(current);
 }
 
 for (var i = 0; i < problems.length; i++) {
