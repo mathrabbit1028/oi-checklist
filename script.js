@@ -55,12 +55,7 @@ function rollback(event) {
         event.currentTarget.parentNode.setAttribute("id", "implementing");
         current[problemNumber] = "2";
     }
-    var newCookie = "";
-    for (var i = 0; i < current.length; i++) {
-        if (current[i] != "") {
-            newCookie += i.toString() + "=" + current[i] + ";";
-        }
-    }
+    var newCookie = problemNumber.toString() + "=" + current[problemNumber];
     console.log(newCookie);
     document.cookie = newCookie;
 }
